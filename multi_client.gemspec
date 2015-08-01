@@ -19,4 +19,10 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.2.3"
 
   s.add_development_dependency "sqlite3"
+
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'guard-bundler'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'shoulda-matchers'
 end
