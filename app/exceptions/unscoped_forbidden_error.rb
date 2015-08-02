@@ -1,0 +1,2 @@
+class UnscopedForbiddenError < StandardError
+end
