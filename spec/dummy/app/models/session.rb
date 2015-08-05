@@ -1,7 +1,7 @@
 class Session
   include ActiveModel::Model
 
-  attr_accessor :client_id
+  attr_accessor :tenant_id
 
-  validates :client_id, presence: true
+  validates :tenant_id, presence: true
 end

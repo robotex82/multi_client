@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "posts/index", type: :view do
   before(:each) do
-    @client = FactoryGirl.create(:multi_client_client)
+    @tenant = FactoryGirl.create(:tenant)
     assign(:posts, [
       Post.create!(
-        :client => @client,
+        :tenant => @tenant,
         :title => "Title",
         :body => "MyText"
       ),
       Post.create!(
-        :client => @client,
+        :tenant => @tenant,
         :title => "Title",
         :body => "MyText"
       )

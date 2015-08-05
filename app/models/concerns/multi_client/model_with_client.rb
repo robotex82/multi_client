@@ -3,12 +3,12 @@ module MultiClient
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :client, class_name: 'MultiClient::Client'
+      belongs_to MultiClient::Configuration.method_name.to_sym, class_name: MultiClient::Configuration.model_name
 
-      scope :for_current_client, lambda { where(client_id: Client.current_id) }
-      default_scope lambda { for_current_client }
+      scope "for_current_#{MultiClient::Configuration.method_name}".to_sym, lambda { where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) }
+      default_scope lambda { send("for_current_#{MultiClient::Configuration.method_name}".to_sym) }
 
-      validates :client_id, presence: true
+      validates MultiClient::Configuration.foreign_key.to_sym, presence: true
     end
 
     class_methods do

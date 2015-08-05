@@ -20,15 +20,15 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   before :each do
-    current_client = FactoryGirl.create(:multi_client_client)
-    MultiClient::Client.current_id = current_client.id
-    @request.host = "#{current_client.subdomain}.test.host"
+    current_tenant = FactoryGirl.create(:tenant)
+    MultiClient::Client.current_id = current_tenant.id
+    @request.host = "#{current_tenant.subdomain}.test.host"
   end
   # This should return the minimal set of attributes required to create a valid
   # Post. As you add validations to Post, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:post).merge({ client_id: MultiClient::Client.current_id })
+    FactoryGirl.attributes_for(:post).merge({ tenant_id: MultiClient::Client.current_id })
   }
 
   let(:invalid_attributes) {
@@ -107,7 +107,7 @@ RSpec.describe PostsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        FactoryGirl.attributes_for(:post).merge({ client_id: MultiClient::Client.current_id, title: 'An updated title' })
+        FactoryGirl.attributes_for(:post).merge({ tenant_id: MultiClient::Client.current_id, title: 'An updated title' })
       }
 
       it "updates the requested post" do

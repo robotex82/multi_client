@@ -15,7 +15,7 @@ module MultiClient
     end
 
     def set_current_client
-      redirect_to root_path and return unless current_client = MultiClient::Client.find_by_subdomain(request.subdomains.first)
+      redirect_to root_url(subdomain: 'www') and return unless current_client = MultiClient::Client.find_by_subdomain(request.subdomains.first)
       MultiClient::Client.current_id = current_client.id
       begin
         yield

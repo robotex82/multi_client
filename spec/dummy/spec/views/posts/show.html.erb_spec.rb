@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "posts/show", type: :view do
   before(:each) do
-    @client = FactoryGirl.create(:multi_client_client)
+    @tenant = FactoryGirl.create(:tenant)
     @post = assign(:post, Post.create!(
-      :client => @client,
+      :tenant => @tenant,
       :title => "Title",
       :body => "MyText"
     ))

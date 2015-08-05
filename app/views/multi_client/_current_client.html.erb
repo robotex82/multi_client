@@ -1,4 +1,4 @@
 <% if MultiClient::Client.current_id %>
-  Current client: <%= current_client.human %>
+  Current <%= MultiClient::Configuration.model_name.constantize.model_name.human %>: <%= current_client.human %>
   <%= link_to 'Logout', sessions_url(subdomain: 'www'), method: :delete %>
 <% end %>

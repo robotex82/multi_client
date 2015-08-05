@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.select :client_id, @clients.collect { |client| [client.human, client.id] } %>
+    <%= f.label :tenant_id %><br>
+    <%= f.select :tenant_id, @tenants.collect { |tenant| [tenant.human, tenant.id] } %>
   </div>
 
   <div class="actions">
