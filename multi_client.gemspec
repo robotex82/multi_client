@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = MultiClient::VERSION
   s.authors     = ["Roberto Vasquez Angel"]
   s.email       = ["robotex@robotex.de"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MultiClient."
-  s.description = "TODO: Description of MultiClient."
+  s.homepage    = "https://github.com/robotex82/multi_client"
+  s.summary     = "MultiClient Module."
+  s.description = "Easy MultiClient Support for Rails."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

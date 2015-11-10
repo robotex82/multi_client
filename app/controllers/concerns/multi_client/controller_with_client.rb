@@ -10,17 +10,21 @@ module MultiClient
 
     private
 
+    def client_class
+      Configuration.model_name.constantize
+    end
+
     def current_client
-      @current_client ||= MultiClient::Client.find(MultiClient::Client.current_id)
+      @current_client ||= client_class.find(MultiClient::Client.current_id) if MultiClient::Client.current_id
     end
 
     def set_current_client
-      redirect_to root_url(subdomain: 'www') and return unless current_client = MultiClient::Client.find_by_subdomain(request.subdomains.first)
-      MultiClient::Client.current_id = current_client.id
+      redirect_to root_url(subdomain: 'www') and return unless current_client = client_class.find_by_subdomain(request.subdomains.first)
+      client_class.current_id = current_client.id
       begin
         yield
       ensure
-        @current_client = MultiClient::Client.current_id = nil
+        @current_client = client_class.current_id = nil
       end
     end
   end
