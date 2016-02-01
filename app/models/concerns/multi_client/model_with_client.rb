@@ -12,9 +12,13 @@ module MultiClient
     end
 
     class_methods do
-      # def unscoped
-      #   raise UnscopedForbiddenError # 'Unscoped is not allowed to prevent client data leakage'
-      # end
+      def unscoped
+        if caller_locations(1,1)[0].label != 'scope'
+          raise UnscopedForbiddenError, "Calling unscoped from #{caller_locations(1,1)[0].label} is not allowed to prevent client data leakage" 
+        else
+          super
+        end
+      end
     end
   end
 end

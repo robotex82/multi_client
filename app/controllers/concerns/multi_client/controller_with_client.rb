@@ -15,11 +15,11 @@ module MultiClient
     end
 
     def current_client
-      @current_client ||= client_class.find(MultiClient::Client.current_id) if MultiClient::Client.current_id
+      @current_client ||= client_class.enabled.find(MultiClient::Client.current_id) if MultiClient::Client.current_id
     end
 
     def set_current_client
-      redirect_to root_url(subdomain: 'www') and return unless current_client = client_class.find_by_subdomain(request.subdomains.first)
+      redirect_to root_url(subdomain: 'www') and return unless current_client = client_class.enabled.find_by_subdomain(request.subdomains.first)
       client_class.current_id = current_client.id
       begin
         yield

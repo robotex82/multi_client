@@ -1,3 +1,28 @@
 = MultiClient
 
+= Installation
+
+Add it to your gemfile:
+
+    # Gemfile
+    gem 'multi_client'
+
+Run the installer:
+
+    > rails generate multi_client:install
+
+Add migrations and migrate
+
+    > rake multi_client:install:migrations && rake db:migrate
+
+= How do I set the current client?
+
+  # console
+  MultiClient::Client.set_current_by_identifier '100'
+
+= How do I unset the current client?
+
+  # console
+  MultiClient::Client.unset_current
+
 This project rocks and uses MIT-LICENSE.

@@ -1,0 +1,9 @@
+%li.dropdown.active
+  = link_to('#', { class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': true, 'aria-expanded': false }) do
+    = t("classes.#{MultiClient::Client.name.underscore}")
+    %span.caret
+  %ul.dropdown-menu
+    - MultiClient::Client.enabled.all.each do |client|
+      %li{ class: (I18n.locale == locale ? 'active' : nil) }
+        = link_to(url_for(host: "#{client.subdomain}.#{request.domain}")) do
+          = "#{client.identifier} (#{client.subdomain})"
