@@ -4,6 +4,6 @@
     %span.caret
   %ul.dropdown-menu
     - MultiClient::Client.enabled.all.each do |client|
-      %li{ class: (I18n.locale == locale ? 'active' : nil) }
+      %li{ class: (request.subdomain == client.subdomain ? 'active' : nil) }
         = link_to(url_for(host: "#{client.subdomain}.#{request.domain}")) do
           = "#{client.identifier} (#{client.subdomain})"
