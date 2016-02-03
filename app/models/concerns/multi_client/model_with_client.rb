@@ -13,6 +13,7 @@ module MultiClient
 
     class_methods do
       def unscoped
+        return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if caller_locations(1,1)[0].label == 'aggregate_column'
         if caller_locations(1,1)[0].label != 'scope'
           raise UnscopedForbiddenError, "Calling unscoped from #{caller_locations(1,1)[0].label} is not allowed to prevent client data leakage" 
         else
