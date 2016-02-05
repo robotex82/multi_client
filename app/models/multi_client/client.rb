@@ -21,11 +21,11 @@ module MultiClient
     end
 
     def self.set_current_by_identifier(identifier)
-      current_id = where(identifier: identifier).first
+      self.current_id = where(identifier: identifier).first.try(:id)
     end
 
     def self.unset_current
-      current_id = nil
+      self.current_id = nil
     end
   end
 end
