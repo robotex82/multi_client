@@ -27,7 +27,11 @@ module MultiClient
       def unscoped
         return super if self.name.demodulize == 'Unscoped'
         return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if caller_locations(1,1)[0].label == 'aggregate_column'
-        if ['_create_record', 'scope', 'validate_each', 'eval_scope', '_update_record'].include? caller_locations(1,1)[0].label
+
+        # Experimental
+        # return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if  ['aggregate_column', 'bottom_item', 'scope_for_slug_generator'].include?(caller_locations(1,1)[0].label)
+
+        if ['_create_record', 'scope', 'validate_each', 'eval_scope', '_update_record', 'aggregate_column', 'bottom_item', 'scope_for_slug_generator'].include?(caller_locations(1,1)[0].label)
           super
         else
           raise UnscopedForbiddenError, "Calling unscoped from #{caller_locations(1,1)[0].label} is not allowed to prevent client data leakage" 
