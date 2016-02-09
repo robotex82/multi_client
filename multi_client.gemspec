@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "multi_client"
   s.version     = MultiClient::VERSION
   s.authors     = ["Roberto Vasquez Angel"]
-  s.email       = ["robotex@robotex.de"]
+  s.email       = ["roberto@vasquez-angel.de"]
   s.homepage    = "https://github.com/robotex82/multi_client"
   s.summary     = "MultiClient Module."
   s.description = "Easy MultiClient Support for Rails."
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 4.2.3"
+  s.add_dependency "rails", ">= 4.0"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "jquery-rails"
