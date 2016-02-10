@@ -16,6 +16,10 @@ module MultiClient
       'client'
     end
 
+    mattr_accessor(:allowed_unscoped_callers) {[]}
+
+    mattr_accessor(:force_client_scope_for_unscoped_callers) {[]}
+
     def self.namespaced_model_name
       "MultiClient::#{model_name}"
     end

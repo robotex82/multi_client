@@ -26,12 +26,10 @@ module MultiClient
     class_methods do
       def unscoped
         return super if self.name.demodulize == 'Unscoped'
-        return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if caller_locations(1,1)[0].label == 'aggregate_column'
-        if ['_create_record', 'scope', 'validate_each', 'eval_scope', '_update_record'].include? caller_locations(1,1)[0].label
-          super
-        else
-          raise UnscopedForbiddenError, "Calling unscoped from #{caller_locations(1,1)[0].label} is not allowed to prevent client data leakage" 
-        end
+        caller = caller_locations(1,1)[0].label
+        return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if MultiClient::Configuration.force_client_scope_for_unscoped_callers.include?(caller)
+        return super if MultiClient::Configuration.allowed_unscoped_callers.include?(caller)
+        raise UnscopedForbiddenError, "Calling unscoped from #{caller} is not allowed to prevent client data leakage" 
       end
     end
   end
