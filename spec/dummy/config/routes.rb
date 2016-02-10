@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount MultiClient::Engine => "/multi_client"
+  mount MultiClient::Engine => '/multi_client'
 
   constraints MultiClient::NoSubdomain do
     resources :sessions, only: [:new, :create] do

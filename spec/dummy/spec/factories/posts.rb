@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :post do
     tenant nil
-    title "MyString"
-    body "MyText"
+    title 'MyString'
+    body 'MyText'
   end
 end

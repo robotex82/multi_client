@@ -16,16 +16,15 @@ MultiClient.configure do |config|
 
   # Calling unscoped is blocked to prevent data leakage. You can define
   # exceptions here.
-  # 
+  #
   # default: config.allowed_unscoped_callers = ['_create_record', 'scope', 'update_positions', 'validate_each', 'eval_scope', '_update_record']
   #
-  config.allowed_unscoped_callers = ['_create_record', 'scope', 'update_positions', 'validate_each', 'eval_scope', '_update_record']
+  config.allowed_unscoped_callers = %w(_create_record scope update_positions validate_each eval_scope _update_record)
 
   # Calling unscoped is blocked to prevent data leakage. You can override the behaviour of unscoped
   # here. If the caller is in this list, it wont get the unscoped scope, but a client scoped relation.
-  # 
+  #
   # default: config.force_client_scope_for_unscoped_callers = ['aggregate_column']
   #
   config.force_client_scope_for_unscoped_callers = ['aggregate_column']
-
 end
