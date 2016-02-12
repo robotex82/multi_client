@@ -16,6 +16,10 @@ module MultiClient
       Thread.current[:client_id]
     end
 
+    def self.current
+      enabled.where(id: Thread.current[:client_id]).first
+    end
+
     def human
       identifier
     end
