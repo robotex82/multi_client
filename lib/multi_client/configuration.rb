@@ -16,6 +16,10 @@ module MultiClient
       'client'
     end
 
+    mattr_accessor :no_subdomain_prefixes do
+      ->(request) { ['www', '', nil] }
+    end
+
     mattr_accessor(:allowed_unscoped_callers) { [] }
 
     mattr_accessor(:force_client_scope_for_unscoped_callers) { [] }

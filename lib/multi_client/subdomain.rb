@@ -2,7 +2,7 @@ module MultiClient
   class Subdomain
     def self.matches?(request)
       case request.subdomain
-      when 'www', '', nil
+      when *MultiClient::Configuration.no_subdomain_prefixes.call(request)
         false
       else
         true

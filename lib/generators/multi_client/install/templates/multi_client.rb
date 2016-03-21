@@ -53,4 +53,11 @@ MultiClient.configure do |config|
   # default: config.force_client_scope_for_unscoped_callers = ['aggregate_column']
   #
   config.force_client_scope_for_unscoped_callers = ['aggregate_column']
+
+  # Proc, that will be called to check, if a client specific domain was given.
+  # It takes one param, the current request. This should return an array.
+  # 
+  # Default: config.no_subdomain_prefixes = ->(request) { ['www', '', nil] }
+  # 
+  config.no_subdomain_prefixes = ->(request) { ['www', '', nil] }
 end
