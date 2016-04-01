@@ -10,7 +10,12 @@ module MultiClient
           super
         end
       end
-      const_set 'Unscoped', klass
+      
+      namespace = self.name.deconstantize
+      namespace = '::Object' if namespace.empty?
+      klass_name = "#{self.name.demodulize}Unscoped"
+      Rails.logger.info "Defining #{klass_name} on #{namespace}"
+      namespace.constantize.const_set klass_name, klass
 
       belongs_to MultiClient::Configuration.method_name.to_sym, class_name: MultiClient::Configuration.model_name
 
@@ -24,7 +29,7 @@ module MultiClient
 
     class_methods do
       def unscoped
-        return super if name.demodulize == 'Unscoped'
+        return super if name =~ /.*Unscoped/
         caller = caller_locations(1, 1)[0].label
         return where(MultiClient::Configuration.foreign_key.to_sym => MultiClient::Configuration.model_name.constantize.current_id) if MultiClient::Configuration.force_client_scope_for_unscoped_callers.include?(caller)
         return super if MultiClient::Configuration.allowed_unscoped_callers.include?(caller)

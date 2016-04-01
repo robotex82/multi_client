@@ -1,5 +1,10 @@
 = MultiClient
 
+= Features
+
+  * Blocks calls to unscoped (unless whitelisted)
+  * Gives you a copy of tenant specific classes with the Unscoped suffix, for unscoped access (Post => PostUnscoped).
+
 = Installation
 
 Add it to your gemfile:
@@ -25,4 +30,30 @@ Add migrations and migrate
   # console
   MultiClient::Client.unset_current
 
+
+= Gotchas
+
+== include MultiClient::ModelWithClient::ActiveSupport::Concern after calls to any class methods.
+
+If you get errors like Paperclip complaining for missing validators or missing association, please make sure to include MultiClient::ModelWithClient::ActiveSupport::Concern after calls to any class methods
+
+Wrong:
+
+    class Picture
+      # PictureUnscoped won't pickup the validation
+      include MultiClient::ModelWithClient
+
+      validates_attachment :image, presence: true,
+                                  content_type: { content_type: /image\/(jpeg|png)/ }
+    end
+
+Correct:
+
+    class Picture
+      validates_attachment :image, presence: true,
+                                  content_type: { content_type: /image\/(jpeg|png)/ }
+      
+      # Including the module after the class_method call.
+      include MultiClient::ModelWithClient
+    end
 This project rocks and uses MIT-LICENSE.
