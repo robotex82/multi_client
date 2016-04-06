@@ -6,7 +6,7 @@ module MultiClient
       source_root File.expand_path('../templates', __FILE__)
 
       def generate_intializer
-        copy_file 'multi_client.rb', 'config/initializers/multi_client.rb'
+        copy_file 'initializer.rb', 'config/initializers/multi_client.rb'
       end
     end
   end

@@ -34,9 +34,23 @@ module MultiClient
 
     def self.with_tenant(tenant, &block)
       original_id = current_id
-      self.current_id = tenant.id
-      block.call
-      self.current_id = original_id
+      begin
+        self.current_id = tenant.id
+        block.call
+      rescue
+        raise
+      ensure
+        self.current_id = original_id
+      end
     end
+
+    def self.master?
+      !!(current && current.identifier == Configuration.master_tenant_identifier)
+    end
+
+    def self.set_current_to_master
+      set_current_by_identifier(Configuration.master_tenant_identifier)
+    end
+
   end
 end

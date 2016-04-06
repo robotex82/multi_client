@@ -60,4 +60,11 @@ MultiClient.configure do |config|
   # Default: config.no_subdomain_prefixes = ->(request) { ['www', '', nil] }
   # 
   config.no_subdomain_prefixes = ->(request) { ['www', '', nil] }
+
+  # The master tenant is a special tenant. You can ask Tenant.master? to
+  # check, if the actual tenant is the master tenant.
+  # 
+  # Default: config.master_tenant_identifier = '000'
+  # 
+  config.master_tenant_identifier = '000'
 end
