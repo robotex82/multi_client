@@ -30,6 +30,13 @@ Add migrations and migrate
   # console
   MultiClient::Client.unset_current
 
+= How do I execute something in the scope of a Tenant?
+
+  # console
+  Tenant.with_tenant(Tenant.find(1)) do
+    # This call will be scoped to tenant_id = 1
+    Post.all
+  end
 
 = Gotchas
 
@@ -66,4 +73,5 @@ Trying to access this attachment with the regular, scoped version of the model f
 Solution: This gem adds an interpolation called :class_without_unscoped.  Use this interpolation in your url and path paperclip options instead of the origional :class_name.
 
 = License
+
 This project rocks and uses MIT-LICENSE.

@@ -31,5 +31,12 @@ module MultiClient
     def self.unset_current
       self.current_id = nil
     end
+
+    def self.with_tenant(tenant, &block)
+      original_id = current_id
+      self.current_id = tenant.id
+      block.call
+      self.current_id = original_id
+    end
   end
 end
