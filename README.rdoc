@@ -20,6 +20,24 @@ Add migrations and migrate
 
     > rake multi_client:install:migrations && rake db:migrate
 
+= How do I scope routing to clients?
+
+  # config/routes.rb
+  constraints MultiClient::Subdomain do
+    resources :posts
+  end
+
+  => acme.example.com/posts
+
+= How do I scope routing to non-clients?
+
+  # config/routes.rb
+  constraints MultiClient::NoSubdomain do
+    resources :posts
+  end
+
+  => www.example.com/posts
+
 = How do I set the current client?
 
   # console

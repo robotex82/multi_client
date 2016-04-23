@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    multi_client (1.0.0)
+    multi_client (2.2.0)
       rails (>= 4.0)
 
 GEM

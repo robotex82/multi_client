@@ -1,3 +1,15 @@
 de:
   classes:
-    multi_client/client: Mandant
+    multi_client/client: 'Mandant'
+  activerecord:
+    attributes:
+      multi_client/client:
+        identifier: 'Bezeichner'
+        subdomain: 'Subdomain'
+        enabled: 'Aktiv'
+        created_at: 'Erstellt am'
+        updated_at: 'Aktualisiert am'
+    models:
+      multi_client/client:
+        one: 'Mandant'
+        other: 'Mandanten'
