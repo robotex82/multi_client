@@ -8,6 +8,10 @@ module MultiClient
 
     scope :enabled, -> { where(enabled: true) }
 
+    def self.master
+      where(identifier: Configuration.master_tenant_identifier).first
+    end
+
     def self.current_id=(id)
       Thread.current[:client_id] = id
     end
@@ -36,10 +40,12 @@ module MultiClient
       original_id = current_id
       begin
         self.current_id = tenant.id
+        Rails.logger.info "Temporarily set tenant id to #{tenant.id}"
         block.call
       rescue
         raise
       ensure
+        Rails.logger.info "Restored tenant id to #{original_id}"
         self.current_id = original_id
       end
     end
