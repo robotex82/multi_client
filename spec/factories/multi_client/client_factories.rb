@@ -3,5 +3,10 @@ FactoryGirl.define do
     sequence(:identifier)
     sequence(:subdomain)
     enabled true
+
+    trait(:master) do
+      identifier MultiClient::Configuration.master_client_identifier
+      subdomain 'master'
+    end
   end
 end

@@ -24,7 +24,7 @@ module MultiClient
 
     mattr_accessor(:force_client_scope_for_unscoped_callers) { [] }
 
-    mattr_accessor(:master_tenant_identifier) { '000' }
+    mattr_accessor(:master_client_identifier) { '000' }
 
     def self.namespaced_model_name
       "MultiClient::#{model_name}"
