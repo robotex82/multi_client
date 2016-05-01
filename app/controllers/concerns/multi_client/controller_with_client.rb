@@ -5,7 +5,7 @@ module MultiClient
     included do
       around_action :set_current_client
 
-      helper_method :current_client
+      helper_method :current_client if respond_to?(:current_client)
     end
 
     private

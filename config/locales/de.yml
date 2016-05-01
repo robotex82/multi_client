@@ -1,6 +1,7 @@
 de:
   classes:
     multi_client/client: 'Mandant'
+    multi_client/create_client_service: 'Dienst zum einrichten von Mandanten'
   activerecord:
     attributes:
       multi_client/client:
