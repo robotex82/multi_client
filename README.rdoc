@@ -56,6 +56,14 @@ Add migrations and migrate
     Post.all
   end
 
+= How do I setup my application so that a client is looked up automatically?
+
+  # app/controllers/application_controller.rb
+  class ApplicationController < ActionController::Base
+    include MultiClient::ControllerWithClient
+    helper_method :current_client
+  end
+
 = Gotchas
 
 == include MultiClient::ModelWithClient::ActiveSupport::Concern after calls to any class methods.
