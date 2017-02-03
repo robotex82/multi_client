@@ -18,6 +18,7 @@ module MultiClient
       say "Input is valid"
       ActiveRecord::Base.transaction do
         response.client = create_client
+        return response unless response.client.persisted?
         Client.with_client(response.client) do
           # response.client_setting = create_client_setting
           response.roles, response.permissions = create_default_roles_and_permissions if create_roles_and_permissions == true
