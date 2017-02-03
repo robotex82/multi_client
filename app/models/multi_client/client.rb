@@ -32,6 +32,10 @@ module MultiClient
       self.current_id = where(identifier: identifier).first.try(:id)
     end
 
+    def self.set_current_by_subdomain(subdomain)
+      self.current_id = where(subdomain: subdomain).first.try(:id)
+    end
+
     def self.unset_current
       self.current_id = nil
     end
