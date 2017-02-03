@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :multi_client_client, class: MultiClient::Client do
-    sequence(:identifier)
-    sequence(:subdomain)
+    sequence(:identifier) { |i| "client.identifier.#{i}"}
+    sequence(:subdomain)  { |i| "client#{i}"}
     enabled true
 
     trait(:master) do
