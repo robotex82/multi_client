@@ -123,7 +123,7 @@ module MultiClient
     end
 
     def splitted_user_emails
-      user_emails.split(/[^\w+@\.\+\-\_]/)
+      user_emails.split(/[^\w+@\.\+\-\_]/).delete_if { |email| !email.try(:include?, '@') }
     end
 
     def request_user_password_resets(emails)
