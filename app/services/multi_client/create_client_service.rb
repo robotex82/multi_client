@@ -60,7 +60,7 @@ module MultiClient
 
     def create_default_roles_and_permissions
       say "Creating roles", indent: 1
-      result = Ecm::Rbac::ImportDefaultPermissionsService.call(filename: Rails.root.join("config", "rbac.yml"))
+      result = Ecm::Rbac::ImportDefaultPermissionsService.call
       if result.success?
         say "Created roles", indent: 2
       else
